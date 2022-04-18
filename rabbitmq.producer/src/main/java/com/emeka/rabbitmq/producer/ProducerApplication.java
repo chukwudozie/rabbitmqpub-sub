@@ -4,6 +4,7 @@ import com.emeka.rabbitmq.producer.entity.Employee;
 import com.emeka.rabbitmq.producer.entity.Picture;
 import com.emeka.rabbitmq.producer.producers.HumanResourceProducer;
 import com.emeka.rabbitmq.producer.producers.PictureProducer;
+import com.emeka.rabbitmq.producer.producers.PictureProducerForTopic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,7 +20,7 @@ public class ProducerApplication implements CommandLineRunner{
 
 // Always autowire the producer class U wish to run
 	@Autowired
-	private PictureProducer producer;
+	private PictureProducerForTopic producer;
 
 	// valid sources and types
 	private final List<String> SOURCES = List.of("mobile", "web");
