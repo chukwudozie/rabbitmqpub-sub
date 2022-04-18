@@ -1,7 +1,9 @@
 package com.emeka.rabbitmq.producer;
 
 import com.emeka.rabbitmq.producer.entity.Employee;
+import com.emeka.rabbitmq.producer.entity.Furniture;
 import com.emeka.rabbitmq.producer.entity.Picture;
+import com.emeka.rabbitmq.producer.producers.FurnitureProducer;
 import com.emeka.rabbitmq.producer.producers.HumanResourceProducer;
 import com.emeka.rabbitmq.producer.producers.PictureProducer;
 import com.emeka.rabbitmq.producer.producers.PictureProducerForTopic;
@@ -20,12 +22,16 @@ public class ProducerApplication implements CommandLineRunner{
 
 // Always autowire the producer class U wish to run
 	@Autowired
-	private PictureProducerForTopic producer;
+//	private PictureProducerForTopic producer;
+	private FurnitureProducer producer;
 
 	// valid sources and types
-	private final List<String> SOURCES = List.of("mobile", "web");
-	private final List<String> TYPES = List.of("jpg","png","svg");
+//	private final List<String> SOURCES = List.of("mobile", "web");
+//	private final List<String> TYPES = List.of("jpg","png","svg");
 //	create 10 dummy pictures using the variables above
+
+	private final List<String> COLORS = List.of("white","red", "green");
+	private final List<String> MATERIALS = List.of("wood","plastic", "steel");
 	public static void main(String[] args) {
 		SpringApplication.run(ProducerApplication.class, args);
 	}
@@ -41,14 +47,23 @@ public class ProducerApplication implements CommandLineRunner{
 //		}
 
 		// Create 10 dummy pictures to be published
-		for(int i = 0 ; i < 10; i++){
-			Picture picture = new Picture();
-			picture.setName("Picture-"+i);
-			// let size be random long between 1 and 10000
-			picture.setSize(ThreadLocalRandom.current().nextLong(1,10000));
-			picture.setSource(SOURCES.get(i % SOURCES.size()));
-			picture.setType(TYPES.get(i % TYPES.size()));
-			producer.sendMessage(picture);
+//		for(int i = 0 ; i < 10; i++){
+//			Picture picture = new Picture();
+//			picture.setName("Picture-"+i);
+//			// let size be random long between 1 and 10000
+//			picture.setSize(ThreadLocalRandom.current().nextLong(1,10000));
+//			picture.setSource(SOURCES.get(i % SOURCES.size()));
+//			picture.setType(TYPES.get(i % TYPES.size()));
+//			producer.sendMessage(picture);
+//		}
+		// create 10 dummy furniture and publish
+		for(int i = 0; i < 10; i++){
+			Furniture furniture = new Furniture();
+			furniture.setColor(COLORS.get(i % COLORS.size()));
+			furniture.setName("Furniture-"+i);
+			furniture.setMaterial(MATERIALS.get(i % MATERIALS.size()));
+			furniture.setPrice(i);
+			producer.sendMessage(furniture);
 		}
 	}
 }
