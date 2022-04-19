@@ -6,3 +6,11 @@ spring:
     addresses: localhost:5672
     username: guest
     password: guest
+
+#configurations for cloudampq; cloud version of rabbit mq
+#spring:
+#  rabbitmq:
+#    addresses: gull.rmq.cloudamqp.com
+#    username: kiofdmer
+#    password: GYTW8z7M-T_oO_-Me4-N3f1PX6bTVbTi
+#    virtual-host: kiofdmer

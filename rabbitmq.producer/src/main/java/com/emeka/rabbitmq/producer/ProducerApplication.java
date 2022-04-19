@@ -8,18 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 @SpringBootApplication
-//@EnableScheduling
+@EnableScheduling
 public class ProducerApplication implements CommandLineRunner{
 
 // Always autowire the producer class U wish to run
 	@Autowired
-	private MyPictureProducer producer;
+	private FixedRateProducer producer;
 //	private FurnitureProducer producer;
 
 	// valid sources and types
@@ -44,15 +45,15 @@ public class ProducerApplication implements CommandLineRunner{
 //		}
 
 		// Create 10 dummy pictures to be published
-		for(int i = 0 ; i < 1; i++){
-			Picture picture = new Picture();
-			picture.setName("Picture-"+i);
-			// let size be random long between 1 and 10000
-			picture.setSize(ThreadLocalRandom.current().nextLong(9000,10000));
-			picture.setSource(SOURCES.get(i % SOURCES.size()));
-			picture.setType(TYPES.get(i % TYPES.size()));
-			producer.sendMessage(picture);
-		}
+//		for(int i = 0 ; i < 1; i++){
+//			Picture picture = new Picture();
+//			picture.setName("Picture-"+i);
+//			// let size be random long between 1 and 10000
+//			picture.setSize(ThreadLocalRandom.current().nextLong(9000,10000));
+//			picture.setSource(SOURCES.get(i % SOURCES.size()));
+//			picture.setType(TYPES.get(i % TYPES.size()));
+//			producer.sendMessage(picture);
+//		}
 		// create 10 dummy furniture and publish
 //		for(int i = 0; i < 10; i++){
 //			Furniture furniture = new Furniture();
